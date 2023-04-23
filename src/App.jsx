@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import NewsListContainer from './components/NewsListContainer'
+import NewsList from './components/NewsList'
 
 function App() {
   return (
-    <NewsListContainer />
+    <NewsList />
   )
 }
 

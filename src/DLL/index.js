@@ -1,12 +1,20 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const fetchNews = createAsyncThunk("news/fetchNews", async () => {
-  const response = await axios.get(
-    `https://newsapi.org/v2/top-headlines?country=ua&apiKey=${
+export const newsApi = createApi({
+  reducerPath: "newsApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: `https://newsapi.org/v2/top-headlines?country=ua&apiKey=${
       import.meta.env.VITE_API_TOKEN
-    }`
-  );
-  return response.data.articles;
+    }`,
+  }),
+  endpoints: (builder) => ({
+    GetNews: builder.query({
+      query: () => ({
+        url: "",
+        method: "GET",
+      }),
+    }),
+  }),
 });
-    
+
+export const { useGetNewsQuery } = newsApi;
