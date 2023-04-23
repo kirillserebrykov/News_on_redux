@@ -1,11 +1,7 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import News from './News';
 function NewsList({ articles, loading, error, loadNews }) {
-    useEffect(() => {
-        loadNews();
-    }, [loadNews]);
-
     if (loading) {
         return <div>Loading...</div>;
     }

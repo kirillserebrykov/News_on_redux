@@ -1,20 +1,19 @@
-import { connect } from 'react-redux';
+import React, {useEffect} from 'react'
 import NewsList from './NewsList';
-import { loadNews } from '../DLL';
+import { fetchNews } from '../DLL';
+import { useDispatch, useSelector } from 'react-redux';
 
 const NewsListContainer = (props) => {
-    return <NewsList {...props}/>
-};
-
-const mapStateToProps = state => ({
-  articles: state.news.articles,
-  loading: state.news.loading,
-  error: state.news.error,
-});
-
-const mapDispatchToProps = {
-  loadNews,
+  const dispatch = useDispatch();
+  const articles = useSelector((state) => state.news.articles);
+  const loading = useSelector((state) => state.news.loading);
+  const error = useSelector((state) => state.news.error);
+  useEffect(() => {
+    dispatch(fetchNews());
+  }, [dispatch]);
+    return <NewsList articles={articles} loading={loading} error={error}/>
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsListContainer);
+
+export default NewsListContainer
